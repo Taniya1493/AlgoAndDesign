@@ -1,0 +1,74 @@
+/*You are given an array of unique integers that contain numbers in random order. You have to find the longest possible sequence of consecutive numbers
+using the numbers from given array.
+You need to return the output array which contains starting and ending element. If the length of the longest possible sequence is one, 
+then the output array must contain only single element.*/
+
+
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+	public static ArrayList<Integer> longestConsecutiveIncreasingSequence(int[] arr) {
+		/* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output and don't print it.
+	 	 * Taking input and printing output is handled automatically.
+		*/
+        // ArrayList<Integer> al=null;
+        // HashMap<Integer,Boolean> hp=new HashMap<>();
+        // for(int i=0;i<arr.length;i++)
+        // {
+        //         hp.put(arr[i],true);
+        // }
+        // int l=1,maxl=1;
+        // for(int i=0;i<arr.length;i++)
+        // {
+        //     int num=arr[i];
+        //     while(hp.containsKey(num-1)){
+        //         l++;
+        //         num=num-1;
+        //     }
+        //     if(l>=maxl){
+        //         al=new ArrayList<>();
+        //         al.add(num+1);
+        //         al.add(arr[i]);
+        //     }
+        // }
+        // return al;
+        
+        
+              HashMap<Integer,Boolean> hp=new HashMap<>();
+        for(int i=0;i<arr.length;i++)
+        {
+                hp.put(arr[i],true);
+        }
+        for(int i=0;i<arr.length;i++)
+        {
+            if(hp.containsKey(arr[i]-1))
+                hp.put(arr[i],false);
+        }
+        int msp=0,ml=0;
+        for(int i=0;i<arr.length;i++){
+            if(hp.get(arr[i])==true){
+                int tl=1;
+                int tsp=arr[i];
+                while(hp.containsKey(tsp+tl)){
+                    tl++;
+                    if(tl>ml) {
+                        msp=tsp;
+                        ml=tl;
+                    }
+                }
+            }
+        }
+
+        ArrayList<Integer> res=new ArrayList<>();
+            res.add(msp+0);
+           res.add(msp+(ml-1));
+        return res;
+        
+    }
+}
