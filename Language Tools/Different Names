@@ -1,0 +1,48 @@
+/*In Little Flowers Public School, there are many students with same first names. You are given a task to find
+the students with same names. You will be given a string comprising of all the names of students and you have to tell the name
+and count of those students having same. If all the names are unique, print -1 instead.
+Note: We don't have to mention names whose frequency is 1.*/
+
+
+
+import java.util.*;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+
+		// Write your code here
+        Scanner sc=new Scanner(System.in);
+        HashMap<String,Integer> hp=new HashMap<>();
+        String s=sc.nextLine();
+        String[] str=s.split(" ");
+        for(int i=0;i<str.length;i++){
+            String key=str[i];
+            if(hp.containsKey(key)){
+                int freq=hp.get(key);
+                freq++;
+                hp.put(key,freq);
+            }
+            else{
+                hp.put(key,1);
+            }
+        }
+        boolean found=false;
+        for(int i=0;i<str.length;i++){
+            String key=str[i];
+            if(hp.get(key)>1){
+                found=true;
+                System.out.println(key+" "+hp.get(key));
+                hp.put(key,0);
+            }
+        }
+        if(found==false)
+            System.out.println("-1");
+    }
+
+}
