@@ -1,0 +1,44 @@
+/*In a class there are ‘n’ number of students. They have three different subjects: Data Structures, Algorithm Design & Analysis and Operating Systems.
+Marks for each subject of all the students are provided to you. You have to tell the position of each student in the class. Print the names of each student
+according to their position in class. Tie is broken on the basis of their roll numbers. Between two students having same marks, the one with less roll number 
+will have higher rank. The input is
+provided in order of roll number.*/
+
+
+
+import java.util.*;
+
+
+public class Main {
+    static class Student implements Comparable<Student>{
+        int marks;
+        String name;
+        public Student(int marks,String name){
+            this.marks=marks;
+            this.name=name;
+        }
+        @Override
+        public int compareTo(Student s){
+            return s.marks-this.marks;
+        }
+    }
+	public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        Student[] arr=new Student[n];
+        for(int i=0;i<n;i++){
+            String name=sc.next();
+            int sum=0;
+            for(int j=0;j<3;j++){
+                int m=sc.nextInt();
+                sum+=m;
+            }
+            int marks=sum;
+            arr[i]=new Student(marks,name);
+        }
+        Arrays.sort(arr);
+        for(int i=0;i<n;i++){
+            System.out.println(i+1 + " "+ arr[i].name);
+        }
+    }
+}
